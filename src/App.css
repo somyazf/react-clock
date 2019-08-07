@@ -1,0 +1,45 @@
+div {
+  display: flex;
+}
+.clock-page {
+  background: #414141;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.clock-button {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  outline: none;
+  background: #ccc;
+  cursor: pointer;
+}
+
+.clock-button:hover{
+  background: #eee;
+}
+
+.stopwatch-laps {
+  padding: 0 0 0 20px;
+  list-style-type: none;
+}
+
+.stopwatch-lap {
+  font-size: 20px;
+  line-height: 60px;
+  padding-right: 20px;
+  text-align: right;
+  border-bottom: 1px solid #d9dae0;
+}
+
+.stopwatch-lap strong {
+  float: left;
+  color: #7f8083;
+  font-weight: 100;
+}
+
+.stopwatch-lap strong::before { content: 'Lap ' }
