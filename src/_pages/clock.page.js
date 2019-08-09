@@ -16,13 +16,17 @@ class ClockPage extends Component {
         this.props.history.push('/stopwatch')
     }
 
+    gotoTimer = () =>{
+        this.props.history.push('/timer')
+    }
+
     render () {
         return <div className="clock-page">
             <Clock clockMode={this.state.clockMode24}/>
             <div style={{marginTop: 20,width: 350,justifyContent: 'space-between'}}>
                 <ClockButton onClick = {this.changeClockMode}>24/12</ClockButton>
                 <ClockButton onClick={this.gotoStopWatch}>StopWatch</ClockButton>
-                <ClockButton >Timer</ClockButton>
+                <ClockButton onClick={this.gotoTimer}>Timer</ClockButton>
             </div>
         </div>
     }

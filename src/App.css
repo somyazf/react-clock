@@ -22,7 +22,10 @@ div {
 .clock-button:hover{
   background: #eee;
 }
-
+.stopwatch-handler{
+    display: flex;
+    flex-direction: row;
+}
 .stopwatch-laps {
   padding: 0 0 0 20px;
   list-style-type: none;
