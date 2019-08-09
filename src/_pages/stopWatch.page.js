@@ -2,14 +2,7 @@ import React,{Component} from 'react';
 import { StopWatch,ClockButton } from "../_components";
 import { withRouter } from "react-router-dom";
 
-const formattedSeconds = (sec) =>{
-    const cSec = sec % 100;
-    const counterSec = (sec - cSec) / 100; //Math.floor(states.stopwatch.counter / 1000)
-    const hour =  Math.floor(counterSec / 3600);
-    const min =   Math.floor((counterSec % 3600) / 60);
-    const second =   counterSec % 60;
-    return hour.toLocaleString('en',{minimumIntegerDigits: 2}) + ':' + min.toLocaleString('en',{minimumIntegerDigits: 2})+ ':' + second.toLocaleString('en',{minimumIntegerDigits: 2}) + ':' + cSec.toLocaleString('en',{minimumIntegerDigits: 2});
-}
+
 
 class StopWatchPage extends Component {
 
@@ -34,6 +27,15 @@ class StopWatchPage extends Component {
         this.setState({
             laps: this.state.laps.concat([this.state.counter])
         })
+    }
+
+    clockStyle = (sec) =>{
+        const second = sec % 60;
+        const min = ((sec - second) / 60) % 60;
+        const hour = (sec - min * 60 - second) / 3600;
+        return hour.toLocaleString('en',{minimumIntegerDigits: 2}) + ':' 
+        + min.toLocaleString('en',{minimumIntegerDigits: 2})+ ':' 
+        + second.toLocaleString('en',{minimumIntegerDigits: 2})
     }
 
     pauseStopWatch = () =>{
@@ -67,18 +69,22 @@ class StopWatchPage extends Component {
 
     render () {
         const {counter} = this.state;
-        return <div className="clock-page">
-            <StopWatch counter = {counter}/>
-            <div style={{marginTop: 20,width: 350,justifyContent: 'space-around'}}>
-                {this.renderBtn()}
-            </div>
-            <ul className="stopwatch-laps">
-                { this.state.laps.map((lap, i) =>
-                    <li className="stopwatch-lap" id={i} key={i}>
-                        <strong>{i + 1}</strong>/ {formattedSeconds(lap)}
-                    </li>)
-                }
-            </ul>
+        return <div className="clock-page">  
+                <div style={{flexDirection:'column', alignItems: 'center'}}> 
+                    <StopWatch counter = {counter}/>
+                    <div style={{marginTop: 20,width: 350,justifyContent: 'space-around'}}>
+                        {this.renderBtn()}
+                    </div>
+                </div>
+                <div>
+                    <ul className="stopwatch-laps">
+                        { this.state.laps.map((lap, i) =>
+                            <li className="stopwatch-lap" id={i} key={i}>
+                                <strong>{i + 1}</strong>/ {this.clockStyle(lap)}
+                            </li>)
+                        }
+                    </ul>
+                </div>
         </div>
     }
 }
