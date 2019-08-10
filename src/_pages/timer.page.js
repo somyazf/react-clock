@@ -7,19 +7,17 @@ class TimerPage extends Component {
     
         state = {
             counter: 0, 
-            values: [1,20,12],
-            start: false
+            start: false,
+            hours:'',
+            mins:'',
+            secs:''
         }
-        // this.handleChange = this.handleChange.bind(this);
       
 
-    handleChange() {
-        // const inputValues = [this.state.values];
-        // inputValues[i] = event.target.value;
-         console.log(this.state.values[0] + this.state.values[1])
-        // this.setState({
-        //   counter: (this.state.values[0]*3600) + (this.state.values[1]*60) + (this.state.values[2])
-        // })
+    handleChange = (event) => {
+        const {target:{value,name}} = event;
+        this.setState({ [name] : value });
+        
     }
 
     goBack = () => {
@@ -27,7 +25,8 @@ class TimerPage extends Component {
     }
     
     startTimer = () =>{
-        this.setState({start: true})
+        debugger
+        this.setState({start: true,counter:!this.state.counter ? this.state.hours*3600 + this.state.mins*60 + +this.state.secs : this.state.counter})
         this.interval = setInterval(()=>{
             if(this.state.counter > 0) this.setState({counter: this.state.counter - 1})
         },1000)
@@ -64,8 +63,14 @@ class TimerPage extends Component {
     render () {
         const {counter} = this.state;
         return <div className="clock-page">
-                <div style={{flexDirection:'column', alignItems: 'center'}}>
-                    <Timer counter = {counter} handleChange = {this.handleChange}/>
+                <div style={{flexDirection:'column', alignItems: 'center'}} className="timer-page">
+                    <h1>Input your desired time</h1>
+                    <div>
+                        <input type="text" onChange={this.handleChange} value={this.state.hours} required name="hours"/> :
+                        <input type="text" onChange={this.handleChange} value={this.state.mins} required name="mins"/> :
+                        <input type="text" onChange={this.handleChange} value={this.state.secs} required name="secs"/>
+                    </div>
+                    <Timer counter = {counter}/>
                     <div style={{marginTop: 20,width: 350,justifyContent: 'space-around'}}>
                         {this.renderBtn()}
                     </div>

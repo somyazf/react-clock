@@ -46,3 +46,15 @@ div {
 }
 
 .stopwatch-lap strong::before { content: 'Lap ' }
+.timer-page input{
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+}
+.timer-page h1{
+  color: white;
+}
+.timer-page div:nth-of-type(1){
+  color: white;
+  font-size: 35px;
+}
