@@ -25,7 +25,6 @@ class TimerPage extends Component {
     }
     
     startTimer = () =>{
-        debugger
         this.setState({start: true,counter:!this.state.counter ? this.state.hours*3600 + this.state.mins*60 + +this.state.secs : this.state.counter})
         this.interval = setInterval(()=>{
             if(this.state.counter > 0) this.setState({counter: this.state.counter - 1})

@@ -20,7 +20,7 @@ class StopWatchPage extends Component {
         this.setState({start: true})
         this.interval = setInterval(()=>{
             this.setState({counter: this.state.counter + 1})
-        },1000)
+        },10)
     }
 
     addLap = () =>{
@@ -29,13 +29,16 @@ class StopWatchPage extends Component {
         })
     }
 
-    clockStyle = (sec) =>{
-        const second = sec % 60;
-        const min = ((sec - second) / 60) % 60;
-        const hour = (sec - min * 60 - second) / 3600;
+    clockStyle = (milsec) =>{
+        const cSec = milsec % 100;
+        const counterSec = (milsec - cSec) / 100; 
+        const hour = Math.floor(counterSec / 3600);
+        const min = Math.floor((counterSec % 3600) / 60);
+        const sec = counterSec % 60;
         return hour.toLocaleString('en',{minimumIntegerDigits: 2}) + ':' 
         + min.toLocaleString('en',{minimumIntegerDigits: 2})+ ':' 
-        + second.toLocaleString('en',{minimumIntegerDigits: 2})
+        + sec.toLocaleString('en',{minimumIntegerDigits: 2})+ ':' 
+        + cSec.toLocaleString('en',{minimumIntegerDigits: 2})
     }
 
     pauseStopWatch = () =>{
